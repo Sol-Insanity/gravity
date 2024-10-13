@@ -1,0 +1,283 @@
+:root {
+    --beige: #F5E6D3; /* Light beige color for text and elements */
+    --purple: #5D3FD3; /* Purple color for buttons and accents */
+    --gold: #FFD700; /* Gold color for branding or special highlights */
+    --black: #1A1A1A; /* Black color for background and text */
+}
+
+/* Reset margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*************** NAVIGATION BAR STYLES ***************/
+
+/* Container for both the small and large navbars */
+.nav-container {
+    position: fixed; /* Fixes navbar at the top of the page */
+    top: 0; /* Aligns navbar to the top */
+    width: 100%; /* Makes navbar span full page width */
+    z-index: 1000; /* Ensures navbar stays on top of other content */
+    background-color: #333; /* Dark background color for the navbar */
+}
+
+/* Small navbar styles */
+.small-nav {
+    background-color: #333; /* Dark background color */
+    padding: 1px; /* Minimal padding for small navbar */
+}
+
+.small-nav ul {
+    list-style-type: none; /* Removes default bullet points from list */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Flexbox for horizontal alignment */
+    justify-content: flex-end; /* Aligns items to the right */
+    overflow: hidden; /* Prevents content overflow */
+}
+
+.small-nav ul li {
+    margin-right: 10px; /* Adds space between navbar items */
+}
+
+.small-nav ul li a {
+    color: white; /* White text color for links */
+    text-decoration: none; /* Removes underline from links */
+    padding: 10px 15px; /* Padding inside link items */
+    display: inline-block; /* Ensures links take up space like a button */
+}
+
+.small-nav ul li a:hover {
+    background-color: #111; /* Darker background color on hover */
+}
+
+/* Large navbar styles */
+.large-nav {
+    background-color: #444; /* Darker background for large navbar */
+    padding: 10px; /* Padding inside the navbar */
+}
+
+.large-nav ul {
+    list-style-type: none; /* Removes default list styling */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Spaces items evenly across navbar */
+    align-items: center; /* Centers items vertically */
+    overflow: hidden; /* Prevents overflow of content */
+}
+
+.large-nav ul li {
+    margin-right: 20px; /* Adds spacing between items */
+}
+
+/* Search bar occupies remaining space in navbar */
+.large-nav ul li.search-bar {
+    flex-grow: 1; /* Expands search bar to fill available space */
+    display: flex; /* Flexbox for horizontal alignment */
+    justify-content: flex-end; /* Aligns search bar to the right */
+}
+
+/* Search input styles */
+.large-nav ul li.search-bar input {
+    padding: 5px; /* Padding inside the input */
+    border: none; /* Removes default border */
+    border-radius: 3px; /* Rounds corners of input field */
+    width: 200px; /* Fixed width for the search input */
+}
+
+/* Links in large navbar */
+.large-nav ul li a {
+    color: white; /* White text for links */
+    text-decoration: none; /* No underline for links */
+    padding: 14px 20px; /* Padding for link elements */
+    display: inline-block; /* Displays links as block elements */
+}
+
+.large-nav ul li a:hover {
+    background-color: #222; /* Darker background on hover */
+}
+
+/*************** HERO SECTION STYLES ***************/
+
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/background.jpeg'); /* Background image with dark overlay */
+    background-size: cover; /* Covers entire section */
+    background-position: center; /* Centers background image */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Flexbox for center alignment */
+    align-items: center; /* Centers content vertically */
+    justify-content: center; /* Centers content horizontally */
+    text-align: center; /* Center-aligns text */
+    color: #ffffff; /* White text color */
+    padding: 0 20px; /* Adds padding inside section */
+}
+
+.hero-content {
+    max-width: 800px; /* Limits width of content */
+}
+
+.hero h1 {
+    font-size: 3.5rem; /* Large heading size */
+    margin-bottom: 1rem; /* Space below heading */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds text shadow for better readability */
+}
+
+.hero p {
+    font-size: 1.5rem; /* Medium paragraph size */
+    margin-bottom: 2rem; /* Space below paragraph */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.hero-button {
+    display: inline-block; /* Button behaves like a block element */
+    padding: 15px 30px; /* Padding around button text */
+    background-color: #f5a623; /* Orange button color */
+    color: #ffffff; /* White button text */
+    text-decoration: none; /* No underline on button */
+    font-size: 1.2rem; /* Medium button text size */
+    font-weight: bold; /* Bold button text */
+    border-radius: 5px; /* Rounded corners for button */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition effects */
+}
+
+.hero-button:hover {
+    background-color: #e09612; /* Darker color on hover */
+    transform: translateY(-3px); /* Slight upward movement on hover */
+}
+
+/*************** SALES BANNER STYLES ***************/
+
+.sales-banner {
+    background-color: #f8f8f8; /* Light background for sales section */
+    padding: 2rem 0; /* Vertical padding around the banner */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Service items in sales banner */
+.service-list {
+    list-style-type: none; /* Removes default list styling */
+    display: flex; /* Flexbox layout for services */
+    justify-content: space-around; /* Distributes service items evenly */
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+    max-width: 1200px; /* Max width for the service list */
+    margin: 0 auto; /* Centers service list */
+    padding: 0;
+}
+
+.service-item {
+    display: flex; /* Flexbox layout for individual service item */
+    flex-direction: column; /* Aligns content vertically */
+    align-items: center; /* Centers content horizontally */
+    text-align: center; /* Centers text */
+    padding: 1rem; /* Padding around each service item */
+    width: 200px; /* Fixed width for service items */
+    transition: transform 0.3s ease; /* Smooth transform effect on hover */
+}
+
+.service-item:hover {
+    transform: translateY(-5px); /* Slight upward movement on hover */
+}
+
+.service-icon {
+    font-size: 2.5rem; /* Large icon size */
+    margin-bottom: 0.5rem; /* Space below icon */
+}
+
+.service-text {
+    font-size: 1rem; /* Regular text size */
+    font-weight: bold; /* Bold text for service description */
+    color: #333; /* Dark text color */
+}
+
+/*************** FOOTER STYLES ***************/
+
+footer {
+    background-color: black; /* Dark background for footer */
+    color: beige; /* Light beige text color */
+    padding: 50px 0; /* Vertical padding for spacing */
+    font-family: Arial, sans-serif; /* Font family for footer text */
+}
+
+.footer-container {
+    display: flex; /* Flexbox layout for footer sections */
+    justify-content: space-between; /* Evenly spaces footer sections */
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+    max-width: 1400px; /* Max width for footer content */
+    margin: auto; /* Centers footer content */
+}
+
+.footer-section {
+    flex: 1; /* Flexible width for each section */
+    margin: 20px; /* Margin around each section */
+    min-width: 250px; /* Prevents sections from shrinking too much */
+}
+
+.company-name {
+    color: gold; /* Gold text color for company name */
+    font-size: 28px; /* Large company name size */
+}
+
+/* Newsletter email input styles */
+.newsletter input[type="email"] {
+    padding: 12px; /* Increased padding inside input */
+    width: 70%; /* Wide input field */
+    border: none; /* Removes border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Newsletter button styles */
+.newsletter button {
+    padding: 12px 25px; /* Bigger button for newsletter */
+    background-color: purple; /* Purple background color */
+    color: beige; /* Beige text color */
+    border: none; /* Removes default border */
+    border-radius: 5px; /* Rounded button corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Larger text size */
+}
+
+/* Footer links list */
+.links ul {
+    list-style-type: none; /* Removes default list styling */
+    padding: 0;
+}
+
+.links li {
+    margin: 15px 0; /* Space between each list item */
+}
+
+.links a {
+    text-decoration: none; /* Removes underline from links */
+    color: beige; /* Light beige text color */
+    font-size: 18px; /* Larger link text size */
+}
+
+/* Social media icon styles */
+.social-icons a img {
+    width: 35px; /* Larger size for social media icons */
+    margin-right: 15px; /* Spacing between icons */
+}
+
+/* Footer bottom section */
+.footer-bottom {
+    display: flex; /* Flexbox layout for footer bottom */
+    justify-content: space-between; /* Spreads out content */
+    padding: 30px 0; /* Padding for spacing */
+    border-top: 1px solid beige; /* Border at the top of the footer */
+    margin-top: 40px; /* Space above footer bottom */
+}
+
+/* Payment method icons */
+.payment-options img {
+    width: 45px; /* Larger payment method icons */
+    margin-left: 15px; /* Space between icons */
+}
+
+/* Footer bottom text */
+.footer-bottom p {
+    margin: 0;
+    color: beige; /* Light beige text color */
+    font-size: 16px; /* Larger text for readability */
+}

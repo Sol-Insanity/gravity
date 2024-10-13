@@ -1,0 +1,13 @@
+/*Service Banner*/
+@media (max-width: 768px) {
+    .service-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-item {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 1rem;
+    }
+}
