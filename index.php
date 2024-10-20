@@ -186,7 +186,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         <nav class="small-nav">
             <ul>
                 <?php if ($loggedIn): ?>
-                    <li><span>Logged in as: <?php echo htmlspecialchars($userEmail); ?></span></li>
+                    <li><a><span>Logged in as: <?php echo htmlspecialchars($userEmail); ?></a></span></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li><a href="#" id="loginBtn">Login</a></li>
