@@ -12,91 +12,175 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
     <title>Lavender Loom</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
+    <style>
+        /* Authentication Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .auth-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-modal-content {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .auth-close:hover {
+            color: #374151;
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .auth-title {
+            color: var(--purple, #5a42b0);
+            font-size: 1.875rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-subtitle {
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .auth-label {
+            display: block;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--purple, #5a42b0);
+            box-shadow: 0 0 0 3px rgba(90, 66, 176, 0.1);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 0.75rem 1.25rem;
+            background-color: var(--purple, #5a42b0);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .auth-button:hover {
+            background-color: #4a32a8;
+        }
+
+        .auth-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            display: none;
+        }
+
+        .message.error {
+            background-color: #fef2f2;
+            color: #ef4444;
+            border: 1px solid #fee2e2;
+        }
+
+        .message.success {
+            background-color: #f0fdf4;
+            color: #22c55e;
+            border: 1px solid #dcfce7;
+        }
+
+        .auth-switch-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .auth-switch-link a {
+            color: var(--purple, #5a42b0);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-switch-link a:hover {
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-
-<style>
-  /* Modal Container */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-/* Show the modal when it has 'show' class */
-.modal.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Close Button */
-.close-modal {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #666;
-}
-
-.close-modal:hover {
-    color: #333;
-}
-
-/* Form Styles */
-.login-form {
-    margin-top: 1rem;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.login-form button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--purple, #5a42b0);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.login-form button:hover {
-    background-color: #4a32a8;
-}
-
-.message {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    text-align: center;
-}
-</style>
-
 <body>
     <div class="nav-container">
         <nav class="small-nav">
@@ -106,7 +190,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li><a href="#" id="loginBtn">Login</a></li>
-                    <li><a href="signuppage.php">Signup</a></li>
+                    <li><a href="#" onclick="openModal('signup')">Signup</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -124,16 +208,76 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
     </div>
 
     <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 style="text-align: center; color: var(--purple, #5a42b0); margin-bottom: 20px;">Login to Lavender Loom</h2>
-            <div class="message" id="loginMessage"></div>
-            <form id="loginForm" class="login-form">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+    <div id="loginModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="auth-close" onclick="closeModal('login')">&times;</span>
+            <div class="auth-logo">
+                <img src="/api/placeholder/120/40" alt="Lavender Loom Logo">
+            </div>
+            <h2 class="auth-title">Login to Lavender Loom</h2>
+            <p class="auth-subtitle">Welcome back!</p>
+            
+            <div id="loginMessage" class="message"></div>
+            
+            <form id="loginForm">
+                <div class="auth-form-group">
+                    <label class="auth-label" for="loginEmail">Email address</label>
+                    <input type="email" id="loginEmail" name="email" class="auth-input" required 
+                           placeholder="Enter your email">
+                </div>
+                
+                <div class="auth-form-group">
+                    <label class="auth-label" for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" class="auth-input" required 
+                           placeholder="Enter your password">
+                </div>
+
+                <button type="submit" class="auth-button">
+                    <span class="button-text">Login</span>
+                    <div class="spinner"></div>
+                </button>
             </form>
+
+            <div class="auth-switch-link">
+                Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="auth-close" onclick="closeModal('signup')">&times;</span>
+            <div class="auth-logo">
+                <img src="/api/placeholder/120/40" alt="Lavender Loom Logo">
+            </div>
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-subtitle">Get started with your free account</p>
+            
+            <div id="message" class="message"></div>
+            
+            <form id="signupForm">
+                <div class="auth-form-group">
+                    <label class="auth-label" for="signupEmail">Email address</label>
+                    <input type="email" id="signupEmail" name="email" class="auth-input" required 
+                           placeholder="Enter your email">
+                </div>
+                
+                <div class="auth-form-group">
+                    <label class="auth-label" for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" class="auth-input" required 
+                           placeholder="Create a password" minlength="8">
+                </div>
+
+                <button type="submit" class="auth-button">
+                    <span class="button-text">Create Account</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <div class="auth-switch-link">
+                Already have an account? <a href="#" onclick="switchToLogin()">Sign in</a>
+            </div>
         </div>
     </div>
 
@@ -218,9 +362,6 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         </div>
       </footer>
 
-      <script src="login.js"></script>
-
-
-
+    <script src="auth.js"></script>
 </body>
 </html>
