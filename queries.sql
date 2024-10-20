@@ -32,10 +32,10 @@ CREATE TABLE items (
     category_id INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL DEFAULT 0,
-    description TEXT DEFAULT NULL,  -- Optional description of the item
+    description TEXT DEFAULT NULL,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE  -- Assuming you have a categories table
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE  
 );
 
 CREATE TABLE item_pictures (

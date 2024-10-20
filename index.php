@@ -13,6 +13,18 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
     <style>
+        :root {
+            --beige-light: #F5F0E5;
+            --beige: #E8DCC4;
+            --purple-dark: #4A2B5F;
+            --purple-light: #6B4485;
+            --gold: #C6A55C;
+            --gold-light: #D4B979;
+            --black: #1A1A1A;
+            --gray-dark: #374151;
+            --gray-medium: #6B7280;
+        }
+
         /* Authentication Modal Styles */
         .auth-modal {
             display: none;
@@ -21,7 +33,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(26, 26, 26, 0.6);
             z-index: 1000;
         }
 
@@ -32,13 +44,15 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         }
 
         .auth-modal-content {
-            background-color: #fff;
+            background-color: var(--beige-light);
             padding: 2.5rem;
             border-radius: 1rem;
             width: 90%;
             max-width: 400px;
             position: relative;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(26, 26, 26, 0.15);
+            margin: 0 auto;
+            border: 1px solid var(--gold);
         }
 
         .auth-close {
@@ -47,11 +61,11 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
             top: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #6b7280;
+            color: var(--purple-dark);
         }
 
         .auth-close:hover {
-            color: #374151;
+            color: var(--gold);
         }
 
         .auth-logo {
@@ -65,7 +79,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         }
 
         .auth-title {
-            color: var(--purple, #5a42b0);
+            color: var(--purple-dark);
             font-size: 1.875rem;
             font-weight: 700;
             text-align: center;
@@ -73,53 +87,65 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         }
 
         .auth-subtitle {
-            color: #6b7280;
+            color: var(--gray-medium);
             text-align: center;
             margin-bottom: 2rem;
         }
 
         .auth-form-group {
             margin-bottom: 1.25rem;
+            max-width: 100%;
         }
 
         .auth-label {
             display: block;
-            color: #374151;
+            color: var(--black);
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 0.5rem;
+            text-align: left;
         }
 
         .auth-input {
             width: 100%;
             padding: 0.75rem 1rem;
-            border: 1px solid #d1d5db;
+            border: 1px solid var(--gold);
             border-radius: 0.5rem;
             font-size: 1rem;
-            transition: border-color 0.15s ease;
+            transition: all 0.15s ease;
+            box-sizing: border-box;
+            display: block;
+            margin: 0;
+            background-color: white;
+            color: var(--black);
         }
 
         .auth-input:focus {
             outline: none;
-            border-color: var(--purple, #5a42b0);
-            box-shadow: 0 0 0 3px rgba(90, 66, 176, 0.1);
+            border-color: var(--purple-dark);
+            box-shadow: 0 0 0 3px rgba(74, 43, 95, 0.1);
         }
 
         .auth-button {
             width: 100%;
             padding: 0.75rem 1.25rem;
-            background-color: var(--purple, #5a42b0);
+            background-color: var(--purple-dark);
             color: white;
-            border: none;
+            border: 2px solid var(--purple-dark);
             border-radius: 0.5rem;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.15s ease;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.75rem;
         }
 
         .auth-button:hover {
-            background-color: #4a32a8;
+            background-color: var(--purple-light);
+            border-color: var(--purple-light);
         }
 
         .auth-button:disabled {
@@ -139,40 +165,42 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
             background-color: #fef2f2;
             color: #ef4444;
             border: 1px solid #fee2e2;
+            margin-bottom: 1rem;
         }
 
         .message.success {
-            background-color: #f0fdf4;
-            color: #22c55e;
-            border: 1px solid #dcfce7;
+            background-color: var(--beige);
+            color: var(--purple-dark);
+            border: 1px solid var(--gold);
         }
 
         .auth-switch-link {
             text-align: center;
             margin-top: 1.5rem;
-            color: #6b7280;
+            color: var(--gray-medium);
             font-size: 0.875rem;
         }
 
         .auth-switch-link a {
-            color: var(--purple, #5a42b0);
+            color: var(--purple-dark);
             text-decoration: none;
             font-weight: 500;
         }
 
         .auth-switch-link a:hover {
-            text-decoration: underline;
+            color: var(--gold);
+            text-decoration: none;
         }
 
         .spinner {
             display: none;
             width: 1.25rem;
             height: 1.25rem;
-            border: 2px solid #ffffff;
+            border: 2px solid white;
             border-top: 2px solid transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin: 0 auto;
+            position: absolute;
         }
 
         @keyframes spin {

@@ -45,27 +45,48 @@ document.getElementById('loginBtn').addEventListener('click', function(e) {
     openModal('login');
 });
 
+
+// Simulate network delay for local testing
+const simulateNetworkDelay = () => new Promise(resolve => setTimeout(resolve, 2000));
+
+// Helper function to toggle loading state
+function toggleLoadingState(button, isLoading) {
+    const buttonText = button.querySelector('.button-text');
+    const spinner = button.querySelector('.spinner');
+    
+    if (isLoading) {
+        button.disabled = true;
+        buttonText.style.visibility = 'hidden'; // Hide text but maintain space
+        spinner.style.display = 'block';
+    } else {
+        button.disabled = false;
+        buttonText.style.visibility = 'visible';
+        spinner.style.display = 'none';
+    }
+}
+
 // Signup form handler
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const form = e.target;
     const button = form.querySelector('button');
-    const buttonText = form.querySelector('.button-text');
-    const spinner = form.querySelector('.spinner');
     const messageDiv = document.getElementById('message');
     
     // Get form data
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    // Disable button and show spinner
-    button.disabled = true;
-    buttonText.style.display = 'none';
-    spinner.style.display = 'block';
+    // Show loading state
+    toggleLoadingState(button, true);
     messageDiv.style.display = 'none';
 
     try {
+        // Add artificial delay when testing locally
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            await simulateNetworkDelay();
+        }
+
         const response = await fetch('api/signup.php', {
             method: 'POST',
             headers: {
@@ -93,10 +114,8 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
         messageDiv.className = 'message error';
         messageDiv.textContent = 'Network error. Please check your connection and try again.';
     } finally {
-        // Re-enable button and hide spinner
-        button.disabled = false;
-        buttonText.style.display = 'block';
-        spinner.style.display = 'none';
+        // Hide loading state
+        toggleLoadingState(button, false);
     }
 });
 
@@ -111,11 +130,16 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    // Disable button during submission
-    button.disabled = true;
-    button.innerHTML = 'Logging in...';
+    // Show loading state
+    toggleLoadingState(button, true);
+    messageDiv.style.display = 'none';
 
     try {
+        // Add artificial delay when testing locally
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            await simulateNetworkDelay();
+        }
+
         const response = await fetch('api/login.php', {
             method: 'POST',
             headers: {
@@ -142,8 +166,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         messageDiv.className = 'message error';
         messageDiv.textContent = 'Network error. Please try again.';
     } finally {
-        // Re-enable button
-        button.disabled = false;
-        button.innerHTML = 'Login';
+        // Hide loading state
+        toggleLoadingState(button, false);
     }
 });

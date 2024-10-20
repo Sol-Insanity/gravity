@@ -1,10 +1,14 @@
 :root {
-    --beige: #F5E6D3; /* Light beige color for text and elements */
-    --purple: #5D3FD3; /* Purple color for buttons and accents */
-    --gold: #FFD700; /* Gold color for branding or special highlights */
-    --black: #1A1A1A; /* Black color for background and text */
+    --beige-light: #F5F0E5;
+    --beige: #E8DCC4;
+    --purple-dark: #4A2B5F;
+    --purple-light: #6B4485;
+    --gold: #C6A55C;
+    --gold-light: #D4B979;
+    --black: #1A1A1A;
+    --gray-dark: #374151;
+    --gray-medium: #6B7280;
 }
-
 /* Reset margin and padding for all elements */
 * {
     margin: 0;
