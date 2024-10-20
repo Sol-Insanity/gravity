@@ -13,6 +13,90 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
 </head>
+
+<style>
+  /* Modal Container */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Show the modal when it has 'show' class */
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Form Styles */
+.login-form {
+    margin-top: 1rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--purple, #5a42b0);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.login-form button:hover {
+    background-color: #4a32a8;
+}
+
+.message {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    text-align: center;
+}
+</style>
+
 <body>
     <div class="nav-container">
         <nav class="small-nav">
@@ -21,8 +105,8 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
                     <li><span>Logged in as: <?php echo htmlspecialchars($userEmail); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="signup.php">Signup</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                    <li><a href="signuppage.php">Signup</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -37,6 +121,20 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
                 </li>
             </ul>
         </nav>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="text-align: center; color: var(--purple, #5a42b0); margin-bottom: 20px;">Login to Lavender Loom</h2>
+            <div class="message" id="loginMessage"></div>
+            <form id="loginForm" class="login-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 
     <section class="hero">
@@ -84,7 +182,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
       
           <div class="footer-section newsletter">
             <h2>Subscribe to our Newsletter</h2>
-            <form action="#">
+            <form action="#newsletter">
               <input type="email" placeholder="Enter your email" />
               <button type="submit">Submit</button>
             </form>
@@ -119,5 +217,10 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
           </div>
         </div>
       </footer>
+
+      <script src="login.js"></script>
+
+
+
 </body>
 </html>
