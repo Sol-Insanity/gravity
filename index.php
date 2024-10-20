@@ -285,7 +285,7 @@ $userEmail = $loggedIn ? $_SESSION['user_email'] : '';
         <div class="hero-text">
             <h1>Welcome to Lavender Loom</h1>
             <p>Get the best quality products at the best prices</p>
-            <button class="hero-button">Shop Now</button>
+            <a href="shop.php" class="hero-button">Shop Now</a>
         </div>
     </section>
 
